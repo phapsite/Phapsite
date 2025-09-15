@@ -1,5 +1,5 @@
 "use client";
-import "./Dashboard.css";
+import "../Dashboard.css";
 export default function JobseekerDashboard() {
   return (
     <div className="dashboard-container">

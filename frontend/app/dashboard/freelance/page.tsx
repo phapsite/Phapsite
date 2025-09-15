@@ -1,7 +1,7 @@
 "use client";
 
-import "./Dashboard.css";
-import "./Dashboard.css";
+
+import "../Dashboard.css";
 export default function FreelanceDashboard() {
   return (
     <div className="dashboard-container">

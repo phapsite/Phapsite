@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { LogIn, UserPlus, Key, Home, ShoppingCart, Briefcase, Users, User } from "lucide-react";
-import { supabase } from "@/lib/supabaseClient";
+import { LogIn, Home, ShoppingCart, Briefcase, Users, User } from "lucide-react";
+//import { supabase } from "@/lib/supabaseClient";
 import LoginModal from "./modal/Login";
 import RegisterModal from "./modal/Register";
 import RecoverModal from "./modal/Recover";

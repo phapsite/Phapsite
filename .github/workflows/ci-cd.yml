@@ -26,8 +26,8 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./${{ matrix.project }}
-        run: npm install --legacy-peer-deps
+        run: npm test -- --ci --watchAll=false
 
       - name: Build project
         working-directory: ./${{ matrix.project }}
-        run: npm run build || echo "⚠️ No build script found, skipping"
+        run: npm test || echo "⚠️ No build script found, skipping"

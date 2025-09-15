@@ -1,6 +1,6 @@
 "use client";
 
-import "./Dashboard.css";
+import "../Dashboard.css";
 
 export default function SellerDashboard() {
   return (
