@@ -1,0 +1,159 @@
+/* Base dark background */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  background: #111111; /* dark base */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* -------------------------- */
+/* Navbar Base */
+/* -------------------------- */
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to right, #111, #000);
+  color: white;
+  z-index: 1000;
+  height: 60px; /* fixed height */
+  max-height: 60px; /* ensure it doesn't grow */
+  line-height: 1;
+  transition: background 0.3s ease;
+  box-shadow: 0 2px 10px -2px rgba(255, 167, 0, 0.7);
+}
+
+/* Container */
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem; /* no vertical padding */
+  height: 100%; /* occupy full navbar height */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.navbar-logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(45deg, #FFD700, #FF8C00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease;
+}
+.navbar-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Links */
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center; /* center vertically */
+  list-style: none;
+}
+
+/* Individual link */
+.navbar-links li {
+  cursor: pointer;
+  position: relative;
+  padding: 0.25rem 0; /* compact vertical padding */
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover underline accent */
+.navbar-links li::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 2px;
+  background: #FFD700; /* gold accent */
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -2px; /* small gap from text */
+  left: 0;
+}
+
+.navbar-links li:hover::after {
+  width: 100%;
+}
+.navbar-links li:hover {
+  transform: translateY(-2px);
+  color: #FFA500; /* orange accent on hover */
+  font-weight: bold;
+}
+
+/* Login button */
+.login-btn {
+  background: linear-gradient(90deg, #FFD700, #FF8C00);
+  padding: 0.25rem 0.75rem; /* smaller padding */
+  display: flex;
+  gap: 4px;
+  border-radius: 6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-weight: bold;
+  color: rgba(0,0,0,0.8);
+}
+.login-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #FFD700;
+  color: #111;
+}
+
+/* Hamburger menu (mobile) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* -------------------------- */
+/* Mobile Responsive */
+/* -------------------------- */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 0;
+    overflow: hidden;
+    flex-direction: column;
+    background: #0a0a0a;
+    gap: 0;
+    transition: max-height 0.3s ease;
+  }
+
+  .navbar-links.active {
+    max-height: 500px; /* dropdown menu */
+  }
+
+  .navbar-links li {
+    padding: 1rem;
+    text-align: center;
+  }
+}
