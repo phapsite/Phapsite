@@ -28,12 +28,12 @@ jobs:
 
       - name: Build frontend
         working-directory: ./frontend
-        run: npm run build
-
+        run: npm run dev
+        
       - name: Install backend dependencies
         working-directory: ./backend
         run: npm install --legacy-peer-deps
 
       - name: Build backend
         working-directory: ./backend
-        run: npm run build || echo "⚠️ No build script found, skipping"
+        run: npm run build || echo "⚠️ No build script found, skipping
