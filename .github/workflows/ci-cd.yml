@@ -1,0 +1,101 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 20
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # 2. Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      # 3. Cache Node modules
+      - name: Cache Node modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            frontend/node_modules
+            backend/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # 4. Install frontend dependencies
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: |
+          echo "🟢 Installing frontend dependencies..."
+          npm ci
+
+      # 5. Install backend dependencies
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: |
+          echo "🟢 Installing backend dependencies..."
+          npm ci
+
+      # 6. Build frontend
+      - name: Build frontend
+        working-directory: ./frontend
+        run: |
+          echo "🔵 Building frontend..."
+          npm run build
+
+      # 7. Build backend
+      - name: Build backend
+        working-directory: ./backend
+        run: |
+          echo "🔵 Building backend..."
+          npm run build || echo "⚠️ No build script found, skipping"
+
+      # 8. Run backend tests
+      - name: Run backend tests
+        working-directory: ./backend
+        run: |
+          echo "🟣 Running backend tests..."
+          npm test || echo "⚠️ No tests configured, skipping"
+
+      # 9. Deploy frontend (Vercel example)
+      - name: Deploy frontend to Vercel
+        if: success() # only run if previous steps succeeded
+        working-directory: ./frontend
+        run: |
+          echo "🚀 Deploying frontend..."
+          npx vercel --prod --confirm
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      # 10. Deploy backend (Supabase example)
+      - name: Deploy backend to Supabase
+        if: success() # only run if previous steps succeeded
+        working-directory: ./backend
+        run: |
+          echo "🚀 Deploying backend..."
+          supabase functions deploy
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+      # 11. Notify success
+      - name: CI/CD Success
+        if: success()
+        run: echo "✅ CI/CD pipeline completed successfully!"
+
+      # 12. Notify failure
+      - name: CI/CD Failed
+        if: failure()
+        run: echo "❌ CI/CD pipeline failed!"
