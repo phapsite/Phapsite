@@ -24,11 +24,11 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: ./frontend
-        run: npm run dev --legacy-peer-deps
+        run: npm run build
 
       - name: Build frontend
         working-directory: ./frontend
-        run: npm run dev
+        run: npm run build
         
       - name: Install backend dependencies
         working-directory: ./backend
