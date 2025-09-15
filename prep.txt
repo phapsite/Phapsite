@@ -1,13 +1,2 @@
- {
-  email: string;
-  password: string;
-  role: string;
-}
-
-onRegister({ email, password, role }) {
-  fetch("/api/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password, role }),
-  });
-}
+# Phapsite Project
+Testing CI/CD workflow 🚀
