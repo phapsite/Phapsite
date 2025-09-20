@@ -1,0 +1,183 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* theme*/
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db; /* gray-300 */
+  --input-text: #111827; /* gray-900 */
+  --placeholder: #9ca3af; /* gray-400 */
+}
+
+html.dark {
+  --background: #111827; /* gray-900 */
+  --foreground: #f3f4f6; /* gray-100 */
+  --input-bg: #374151; /* gray-700 */
+  --input-border: #4b5563; /* gray-600 */
+  --input-text: #f9fafb; /* gray-50 */
+  --placeholder: #9ca3af; /* gray-400 */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-input-bg: var(--input-bg);
+  --color-input-border: var(--input-border);
+  --color-input-text: var(--input-text);
+  --color-placeholder: var(--placeholder);
+  /* ... other variables ... */
+}
+
+
+
+/* Base light + dark mode */
+@layer base {
+  html {
+    @apply bg-white text-gray-900;
+    font-family: var(--font-sans);
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  body {
+    @apply bg-white text-gray-900;
+    font-family: var(--font-sans);
+  }
+
+  html.dark {
+    @apply bg-gray-900 text-gray-100;
+  }
+}
+/* background-color and title*/
+html.dark .bg-gray-50 { @apply bg-gray-800 text-gray-100; }
+html.dark .text-blue { 
+  @apply bg-gradient-to-r
+  from-yellow-400 
+  via-yellow-300 
+  to-orange-400 
+  bg-clip-text 
+  text-transparent; 
+}
+html:not(.dark) .text-blue {
+  @apply bg-gradient-to-r 
+  from-blue-600 
+  via-blue-500 
+  to-indigo-600 
+  bg-clip-text 
+  text-transparent; 
+}
+
+html.dark .icon-blue {
+  @apply text-yellow-400;
+}
+
+html:not(.dark) .icon-blue {
+  @apply text-blue-600;
+}
+
+html.dark .bg-blue-button { 
+    @apply bg-yellow-400 
+    text-gray-800 z-[1000] transition-all duration-200 ease-in-out;
+  &:hover {
+    @apply bg-yellow-300 text-gray-100 scale-105 shadow-xl shadow-yellow-500/25;
+  }
+}
+
+html:not(.dark) .bg-blue-button {
+  @apply bg-blue-600 
+  text-gray-300 z-[1000] transition-all duration-200 ease-in-out;
+  &:hover {
+    @apply bg-blue-500 text-gray-100 scale-105 shadow-xl shadow-blue-500/25;
+  }
+  
+}
+/* Reset light-text class to normal behavior in light mode */
+html.dark .bg-gray-50 .light-text {
+    @apply text-gray-300;
+    }
+html:not(.dark) .light-text {
+  @apply text-gray-600; 
+}
+
+/* Card theme */
+html.dark .card{
+    @apply bg-gray-700 
+    shadow-gray-100/25 
+    shadow-lg hover:shadow-md 
+    transition-shadow 
+    duration-200 
+    border-gray-500; 
+    
+}
+html:not(.dark) .card {
+  @apply bg-gray-50 
+  shadow-gray-500/25 
+  shadow-lg 
+  hover:shadow-md 
+  transition-shadow 
+  duration-200
+  border-gray-400; /* force reset to dark text in light mode */
+}
+
+html:not(.dark) .card-wrapper {
+  @apply text-gray-50 bg-gradient-to-br from-blue-600 to-purple-500 rounded-3xl p-8 sm:p-12 shadow-2xl;
+}
+
+html.dark .card-wrapper {
+  @apply text-gray-50 bg-gradient-to-br 
+  from-yellow-400/20 
+  to-orange-300/20 
+  rounded-3xl 
+  p-8 sm:p-12 
+  shadow-2xl border-yellow-300;
+}
+
+html.dark .card-display {
+  @apply bg-gradient-to-br 
+  from-blue-500 to-purple-600 
+  dark:from-blue-600 dark:to-purple-700 
+  rounded-3xl p-1;
+}
+html:not(.dark) .card-display { 
+    @apply bg-gradient-to-br 
+    from-yellow-500 to-orange-600 
+    dark:from-yellow-500 dark:to-orange-600
+    rounded-3xl p-1;
+    
+}
+
+html.dark .tab-button {
+  @apply text-yellow-300 
+  bg-gray-800;
+}
+html:not(.dark) .tab-button {
+  @apply text-blue-500
+  backdrop-blur-lg 
+  bg-white/50;
+}
+@layer components {
+  /* Base input styles using CSS variables */
+  input,
+  textarea,
+  select {
+    background-color: var(--color-input-bg);
+    border-color: var(--color-input-border);
+    color: var(--color-input-text);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-placeholder);
+  }
+
+  /* Focus states */
+  input:focus,
+  textarea:focus {
+    --tw-ring-color: #3b82f6; /* blue-500 */
+    border-color: #3b82f6;
+  }
+}

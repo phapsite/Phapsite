@@ -6,24 +6,30 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "test": "jest"
+    "lint": "eslint"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.57.4",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.14",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.544.0",
     "next": "15.5.3",
+    "postcss": "^8.5.6",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-hot-toast": "^2.6.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@rollup/rollup-android-arm64": "^4.50.2",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^20",
-    "@types/react": "^19.1.13",
-    "@types/react-dom": "^19.1.9",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
+    "lightningcss.android-arm64.node": "^1.29.3-1",
+    "lucide": "^0.544.0",
     "tailwindcss": "^4.1.13",
     "typescript": "^5"
   }
